@@ -8,4 +8,7 @@ fn test() {
         hostname: "plop",
         port: 43
     };
+
+    assert_eq!("plop", who.hostname);
+
 }
