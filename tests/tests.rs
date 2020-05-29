@@ -4,11 +4,11 @@ use whois_rs::Server;
 
 #[test]
 fn test() {
-    let who = Server {
+    let server = Server {
         hostname: "plop",
         port: 43
     };
 
-    assert_eq!("plop", who.hostname);
+    assert_eq!("plop", server.hostname);
 
 }
