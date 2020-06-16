@@ -1,6 +1,6 @@
 extern crate whois_rs;
 
-use whois_rs::Server;
+use whois_rs::server::Server;
 
 #[test]
 fn test() {
