@@ -28,9 +28,9 @@ mod tests {
             port: 43,
         };
 
-        let response = server.connect().unwrap();
+        let response = server.connect("com").unwrap();
         println!("{}", response);
 
-        assert!(true);
+        assert!(!response.is_empty());
     }
 }

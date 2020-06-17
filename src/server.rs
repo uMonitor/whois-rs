@@ -15,20 +15,19 @@ pub struct Server<'a> {
 
 
 impl Server<'_> {
-  pub fn connect(&self) -> Result<String, io::Error> {
+  pub fn connect(&self, part: &str) -> Result<String, io::Error> {
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", self.hostname, self.port)) {
       debug!("connected");
 
-      let request = "com";
+      let request = format!("{}\r\n", part);
       if let Ok(size) = stream.write(String::from(request).as_bytes()) {
         debug!("sent {} bytes", size);
 
-        let mut response = [0; 2048];
-        if let Ok(read_size) = stream.read(&mut response) {
+        let mut response = String::from("");
+        if let Ok(read_size) = stream.read_to_string(&mut response) {
 
-          let s = str::from_utf8(&response).unwrap();
           debug!("read {} bytes", read_size);
-          return Ok(s.to_string());
+          return Ok(response.to_string());
 
         }
       }
