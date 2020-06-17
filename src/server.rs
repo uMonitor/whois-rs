@@ -15,7 +15,7 @@ pub struct Server<'a> {
 
 
 impl Server<'_> {
-  pub fn connect(&self, part: &str) -> Result<String, io::Error> {
+  pub fn get_domain_info(&self, part: &str) -> Result<String, io::Error> {
     if let Ok(mut stream) = TcpStream::connect(format!("{}:{}", self.hostname, self.port)) {
       debug!("connected");
 

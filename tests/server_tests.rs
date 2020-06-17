@@ -28,7 +28,7 @@ mod tests {
             port: 43,
         };
 
-        let response = server.connect("com").unwrap();
+        let response = server.get_domain_info("com").unwrap();
         println!("{}", response);
 
         assert!(!response.is_empty());
