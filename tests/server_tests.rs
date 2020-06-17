@@ -1,27 +1,36 @@
 extern crate whois_rs;
 
-use whois_rs::server::Server;
+#[cfg(test)]
+mod tests {
+    use whois_rs::server::Server;
 
-#[test]
-fn test() {
-    let server = Server {
-        hostname: "plop",
-        port: 43
-    };
+    fn init() {
+        let _ = env_logger::builder().is_test(true).try_init();
+    }
 
-    assert_eq!("plop", server.hostname);
-}
+    #[test]
+    fn test() {
+        init();
 
-#[test]
-fn connect_to_iana() {
-    let server = Server {
-        hostname: "whois.iana.org",
-        port: 43
-    };
+        let server = Server {
+            hostname: "plop",
+            port: 43,
+        };
 
-    let response = server.connect().unwrap();
-    println!("ploooop");
-    println!("", response);
+        assert_eq!("plop", server.hostname);
+    }
 
-    assert!(true);
+    #[test]
+    fn connect_to_iana() {
+        init();
+        let server = Server {
+            hostname: "whois.iana.org",
+            port: 43,
+        };
+
+        let response = server.connect().unwrap();
+        println!("{}", response);
+
+        assert!(true);
+    }
 }
